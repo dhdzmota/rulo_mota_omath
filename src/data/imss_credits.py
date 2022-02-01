@@ -8,8 +8,13 @@ import json
 import requests
 import pandas as pd
 
+from src import config
 
-DATA_PATH =
+
+DATA_PATH = os.path.join(
+    config.PRJ_DIR,
+    'data/raw/imss_credits')
+
 
 api_url = (
    'https://api.datamexico.org/tesseract/cubes/'
@@ -19,21 +24,21 @@ api_url = (
    'measures%5B%5D=Credits&'
    'parents=false&sparse=false')
 
+
 def download():
     """
     """
-    req = requests.get(api)
+    req = requests.get(api_url)
     json_data = json.loads(req.text)
 
     data = pd.json_normalize(json_data['data'])
 
-    data.to_csv()
-
-    data = data[data['Sex'] != 'Not Specified']
-
-    data['Municipality ID'].value_counts()
-
-    data['Sex'].value_counts()
+    data.to_csv(DATA_PATH, index=False)
 
 
+def get():
+    """
+    """
+    data = pd.read_csv(DATA_PATH)
 
+    return data
