@@ -42,3 +42,7 @@ def get():
     data = pd.read_csv(DATA_PATH)
 
     return data
+
+
+if __name__ == '__main__':
+    download()

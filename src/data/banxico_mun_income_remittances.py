@@ -14,11 +14,12 @@ DATA_PATH = os.path.join(
 
 
 api_url = (
-    'https://api.datamexico.org/tesseract/cubes/'
-    'banxico_mun_income_remittances/aggregate.jsonrecords?'
-    'drilldowns%5B%5D=Geography+Municipality.Geography.Municipality&'
-    'drilldowns%5B%5D=Time.Date.Year&measures%5B%5D=Remittance+Amount&'
-    'parents=false&sparse=false')
+    'https://api.datamexico.org/tesseract/data.jsonrecords?'
+    'cube=banxico_mun_income_remittances&'
+    'drilldowns=Municipality%2CYear&'
+    'measures=Remittance+Amount&'
+    'parents=false&'
+    'sparse=false')
 
 
 def download():
@@ -40,3 +41,6 @@ def get():
 
     return data
 
+
+if __name__ == '__main__':
+    download()
