@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import glob
 
 import requests
 from bs4 import BeautifulSoup
@@ -116,4 +117,5 @@ def download():
                         sheet
                     )._cell_values)
                 # save sheet as csv
-                sheet_df.to_csv(data_path)
+                sheet_df.to_csv(data_path, index=False)
+
