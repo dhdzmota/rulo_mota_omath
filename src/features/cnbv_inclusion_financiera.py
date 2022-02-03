@@ -181,6 +181,20 @@ def process(df):
     return df
 
 
+def get(path):
+    """
+    """
+    data = pd.read_csv(path)
+
+    return data
+
+
+def list_datasets():
+    """
+    """
+    return glob.glob(os.path.join(DATA_FOLDER, '*.csv'))
+
+
 if __name__ == '__main__':
     """
     """
