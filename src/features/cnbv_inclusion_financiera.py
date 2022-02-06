@@ -84,6 +84,7 @@ def clean_col_name(txt):
     txt = txt.replace('  ', ' ')
     txt = txt.strip(' ')
     txt = txt.replace(' ', '_')
+    txt = txt.replace(',', '')
 
     return txt
 
@@ -122,7 +123,7 @@ def rename_columns(df, df_rows_dropped):
     return df
 
 
-def process(df):
+def process():
     """
     """
     csv_files = get_csvs()

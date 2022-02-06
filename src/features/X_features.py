@@ -2,14 +2,20 @@
 # -*- coding: utf-8 -*-
 import datetime
 import pandas as pd
+import os
 
 from src import config
 from src.data.utils import parallel
+from src.features.utils import get_config
 
 
 DATA_GROUPER = None
 FEATURE_LIST = None
 
+
+DATA_PATH= os.path.join(
+    config.PRJ_DIR,
+    'data/processed/X.csv')
 
 def convert_to_date(date):
     """
@@ -107,42 +113,26 @@ def get(data, feature_list):
 if __name__ == '__main__':
     """
     """
-    import os
 
     path = os.path.join(
         config.PRJ_DIR,
-        'data/interim/cnbv/inclusion_financiera/BD Tenencia Uso EACP Mun.csv')
+        'data/interim/cnbv/inclusion_financiera/')
 
-    data = pd.read_csv(path)
+    config_features = get_config()
 
-    feature_list = [
-        'captacion__depositos_al_ahorro',
-        'captacion__depositos_a_la_vista',
-        'captacion__depositos_a_plazo',
-        'captacion__tarjetas_de_debito',
-        'credito__credito_al_consumo',
-        'credito__credito_a_la_vivienda',
-        'transacciones__en_tpv',
-        'transacciones__en_cajeros_automaticos',
-        'captacion__depositos_al_ahorro (2)',
-        'captacion__depositos_a_la_vista (2)',
-        'captacion__depositos_a_plazo (2)',
-        'captacion__tarjetas_de_debito (2)',
-        'credito__credito_al_consumo (2)',
-        'credito__credito_a_la_vivienda (2)',
-        'transacciones__en_tpv (2)',
-        'transacciones__en_cajeros_automaticos (2)',
-        'clientes_-_sofipo__mujeres', 'clientes_-_sofipo__hombres',
-        'socios_-_socap__mujeres', 'socios_-_socap__hombres',
-        'total_de_usuarios_-_eacp__mujeres',
-        'total_de_usuarios_-_eacp__hombres',
-        'captacion__deposito_al_ahorro',
-        'captacion__deposito_a_la_vista',
-        'captacion__deposito_a_plazo',
-        'captacion__tarjeta_debito',
-        'captacion__deposito_al_ahorro (2)',
-        'captacion__deposito_a_la_vista (2)',
-        'captacion__deposito_a_plazo (2)',
-        'captacion__tarjeta_debito (2)']
+    data_features = []
+    for key in config_features.keys():
+        path_dataset = path+key
+        feature_list = config_features[key]
 
-    data_features = get(data, feature_list)
+        data = pd.read_csv(path_dataset)
+
+        data_features.append(get(data, feature_list))
+
+    X = pd.concat(data_features, axis=1)
+
+    X.to_csv(DATA_PATH,
+             encoding='utf-8',
+             mode='w')
+
+

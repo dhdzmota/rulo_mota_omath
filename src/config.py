@@ -25,6 +25,7 @@ _prj_folders = [
     'reports'
 ]
 
+
 for folder in _prj_folders:
     os.makedirs(
         os.path.join(PRJ_DIR, folder),
