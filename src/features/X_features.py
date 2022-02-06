@@ -99,6 +99,8 @@ def get(data, feature_list):
     ) + '-' + (
         mun_features['year'].astype('str'))
 
+    mun_features.set_index('id', inplace=True)
+
     return mun_features
 
 

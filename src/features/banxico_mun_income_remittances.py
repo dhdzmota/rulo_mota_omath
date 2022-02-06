@@ -77,4 +77,7 @@ def get():
     new_data['Remittance Amount Million USD'] = new_data[
         'Remittance Amount'] / 1e+6
 
+    new_data['Remittance Amount Million USD log1p'] = new_data[
+        'Remittance Amount Million USD'].apply(lambda x: np.log1p(x))
+
     return new_data
