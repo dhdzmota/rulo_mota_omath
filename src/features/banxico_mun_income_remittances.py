@@ -17,10 +17,6 @@ def get():
     data['id'] = data['Municipality ID'] + '-' + data['Year'].astype(str)
     data.drop_duplicates('id', keep='first', inplace=True)
 
-    data[
-        data['Municipality ID'] == '20430'
-    ]
-
     new_data = []
     for mun_id, data_mun in data.groupby('Municipality ID'):
         data_mun.sort_values('Year', inplace=True)
