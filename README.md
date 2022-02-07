@@ -11,12 +11,15 @@ beetwen the financial inclusion and remittances in México
 Getting the data
 ==============================
 Execute the script src/data/cnbv_inclusion_financiera.py
+
 Execute the script src/data/banxico_mun_income_remittances.py
 
 Creating features
 ==============================
 Execute the script src/features/cnbv_inclusion_financiera.py
+
 Execute the script src/features/banxico_mun_income_remittances.py
+
 Execute the script src/features/X_features.py
 
 
