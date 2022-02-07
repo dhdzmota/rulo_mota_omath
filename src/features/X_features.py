@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import pandas as pd
+import numpy as np
 import os
 
 from src import config
@@ -55,15 +56,22 @@ def get_mun_features(mun_id):
             q3 = Q3[feature].iloc[0]
             q4 = Q4[feature].iloc[0]
 
+            qs = np.array([q1, q2, q3, q4])
+
+#            qs = np.array([1, 1, 1, 1])
+#            if np.abs(np.diff(qs)).sum() > 0.0001:
             x['%s_delta' % feature] = q4 - q1
-            x['%s_mean_prop' % feature] = ((
-                q2 / (q1 + 1e-6)
-            ) + (
-                q3 / (q2 + 1e-6)
-            ) + (
-                q4 / (q3 + 1e-6)
-            )) / 3
-            x['%s_prop' % feature] = q4 / (q1 + 1e-6)
+            x['%s_gradient' % feature] = np.gradient(qs).mean()
+            x[feature] = q1
+
+#            x['%s_mean_prop' % feature] = ((
+#                q2 / (q1 + 1e-6)
+#            ) + (
+#                q3 / (q2 + 1e-6)
+#            ) + (
+#                q4 / (q3 + 1e-6)
+#            )) / 3
+#            x['%s_prop' % feature] = q4 / (q1 + 1e-6)
         X.append(x)
 
     X = pd.DataFrame(X)
