@@ -7,6 +7,11 @@ In this project you can find a pipeline to download, clean data,
 processes and create feature in order to find the relationship
 beetwen the financial inclusion and remittances in México
 
+Installing requirements
+==============================
+Execute the following command to install the requirements: pip install -r requirements.txt
+
+Disclaimer: python3.8 might not work. Try to use python3.7
 
 Getting the data
 ==============================
